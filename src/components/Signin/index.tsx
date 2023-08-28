@@ -1,12 +1,59 @@
 'use client'
 
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useForm , SubmitHandler } from 'react-hook-form';
+import {useRouter} from "next/navigation"
+
+
+interface FormType  {
+    Email:string;
+    Password:string;
+}
 
 
 export default function SignInCrd (){
 
-    const [err,setErr] = useState(false);
+    const [err, setErr] = useState('');
+    const { register,handleSubmit,resetField } = useForm<FormType>();
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+    
+
+    const HandleSubmitSignIn : SubmitHandler<FormType> = async (e)=>{
+        setErr('');
+        setIsLoading(true);
+
+        try {
+
+            const res = await signIn('credentials',{
+                redirect:false,
+                email:e.Email,
+                password:e.Password
+            });
+
+            if(res?.error){
+                setIsLoading(false);
+                setErr('The email of password is wrong !');
+                resetField('Password');
+                return ;
+            }
+
+            if(res?.ok){
+                setIsLoading(false);
+                router.push('/');
+                return ;
+            }
+
+        } catch (err) {
+            setIsLoading(false);
+            setErr("Something want wrong !");
+            console.log(err);
+            return
+        }
+    }
+
 
 
 
@@ -24,12 +71,12 @@ export default function SignInCrd (){
     
         <div className="w-full p-3  mb-5">
 
-            <form className="">
+            <form onSubmit={handleSubmit(HandleSubmitSignIn)}>
             
-             <input className="--input w-full mb-3" type="email" placeholder="Email" />
-             <input className="--input w-full " type="password" placeholder="Password" />
+             <input {...register('Email',{required:true})} className="--input w-full mb-3" type="email" placeholder="Email" />
+             <input {...register('Password',{required:true})} className="--input w-full " type="password" placeholder="Password" />
 
-            </form>
+            
 
                 {
                     err ? (
@@ -40,8 +87,19 @@ export default function SignInCrd (){
                 }
 
             <div className="w-full justify-center mt-3">
-                <button className="--but w-full rounded-md">SignIn</button>
+                <button disabled={isLoading} type='submit' className="--but w-full flex justify-center rounded-md">
+                        {
+                            isLoading ? (
+                                <div className="w-5 h-5 m-[2px] rounded-full border-[3px] border-solid border-blue-500 border-r-transparent animate-spin"></div>
+                            ) : (<>SignIn</>)
+
+                        }
+                    </button>
             </div>
+            
+            
+            
+            </form>
 
             <div className="w-full my-2 ">
                 <p className="text-sm text-neutral-900">
