@@ -33,15 +33,19 @@ const UserSchema = new Schema<UserSchemaType>({
         type:String
     },
     Follow:[
-        {   require:true,
+        {   required:true,
             type:String
         }
     ],   
     Followers:[
-        {   require:true,
+        {   required:true,
             type:String
         }
-    ]
+    ],
+    Theme:{
+        required:true,
+        type:String
+    }
 
 },{timestamps:true});
 

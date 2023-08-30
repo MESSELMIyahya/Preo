@@ -1,35 +1,46 @@
 'use client'
-import { useNewFetch } from "@/contexts/maindata";
+import { useNewFetch, usePostMod } from "@/contexts/maindata";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 
 export default function CreateForm (){
     const {data:session} = useSession();
     const router = useRouter();
-    const { setNew } = useNewFetch()
+    const { mod , prm , reset , data } = usePostMod();
 
+    
     const [ isLoading ,setIsLoading ] = useState(false);
     const [ err , setErr ] = useState('');
-
+    
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+
+    useEffect(()=>{
+        textareaRef.current.value = mod == 'create' ? '' : data.text
+    },[mod]);
 
     const HandleAddPost = async ()=>{
         setErr('');
-        if(textareaRef.current?.value.length < 10){
+        if(textareaRef.current.value.length < 10){
             setErr('The post should be more then 10 characters');
             textareaRef.current?.focus();
             return;
         }
         setIsLoading(true);
+
         try{
-            await axios.post('/api/post/create',{Email:session?.user?.email,Text:textareaRef.current?.value});
-            setNew(true);
+            if(mod == 'create') await axios.post('/api/post/create',{Email:session?.user?.email,Text:textareaRef.current?.value});
+            else if (mod == 'update') await axios.put('/api/post/update',{id:prm,Text:textareaRef.current?.value});
+            router.refresh();
+            setIsLoading(false);
+            reset();
             router.push('/');
         }catch(err){
+            reset();
             setIsLoading(false);
             setErr("Something want wrong !");
             console.log(err);
@@ -41,7 +52,7 @@ export default function CreateForm (){
     
     <div className="w-[33em] --crd p-3">
         <div className="w-full flex justify-center ">
-            <h3 className="text-2xl font-medium text-neutral-900 uppercase mb-3">Create Post</h3>
+            <h3 className="text-2xl font-medium text-neutral-900 uppercase mb-3">{ mod == 'create' ? 'Create Post' : "update" }</h3>
         </div>
         <div className="w-full mb-1">
             <textarea ref={textareaRef} className="w-full h-[17em] --input resize-none" placeholder="Post Message"></textarea>
@@ -56,8 +67,8 @@ export default function CreateForm (){
         <button onClick={()=>HandleAddPost()} disabled={isLoading} className="w-full rounded-md --but flex justify-center">
         {
                 isLoading ?(
-                    <div className="w-5 h-5 m-[2px] rounded-full border-[3px] border-solid border-blue-500 border-r-transparent animate-spin"></div>
-                ) :(<>Post</>)
+                    <div className="--spr"></div>
+                ) :( mod == 'create' ? 'Post' : 'Update' )
 
                  }
             </button>

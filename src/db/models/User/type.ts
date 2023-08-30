@@ -10,5 +10,6 @@ interface UserSchemaType {
     Posts:string[];
     Desq:string;
     Follow:string[];
+    Theme:string;
     Followers:string[];
 }

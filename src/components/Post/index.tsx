@@ -1,4 +1,8 @@
+'use clinet';
+
 import Link from "next/link";
+import PostPopup from "../PostPop";
+import { useState } from "react";
 
 
 interface Props {
@@ -10,22 +14,28 @@ interface Props {
         Image: string;
     }
     FullSize?:boolean
+    id:string
+    color:string
+    owner:boolean,
 }
 
 
-export default function Post({ FullSize, Author,date,Text }: Props) {
+export default function Post({ FullSize, Author,date,Text,owner,id,color }: Props) {
 
-    const g = Intl.DateTimeFormat('en',{
-        dateStyle:'short'
-    })
-    const Fd = g.format(new Date(date))
+    const [ toggleMenu , setToggleMenu ] = useState<boolean>(false);
+ 
 
     return (<>
-        <div style={{width:FullSize ? '100%':'26em'}} className="w-[26em] --crd p-4">
+        <div style={{width:FullSize ? '100%':''}} className="w-[26em] sm:w-full --crd p-4 relative">
+            {
+
+              toggleMenu ? (<PostPopup isOwner={owner} text={Text} PostId={id} close={()=>setToggleMenu(false)} />) : (<></>)
+
+            }
 
             <div className="w-full flex items-center justify-between mb-3">
                 <div className="flex items-center gap-1">
-                    <div className="w-10 h-10 bg-blue-400 rounded-full flex justify-center items-center">
+                    <div style={{backgroundColor:color||''}} className="w-10 h-10 bg-neutral-800 rounded-full flex justify-center items-center">
                     <div className=" items-center text-xl text-blue-50  font-bold uppercase" >{
                     
                     Author.Name.split('')[0] 
@@ -42,7 +52,14 @@ export default function Post({ FullSize, Author,date,Text }: Props) {
 
                 </div>
 
-                <span className="text-md text-neutral-400 font-medium">{ Fd }</span>
+
+
+                <div className="w-8 h-8 flex justify-center items-center">
+
+                <i onClick={()=>setToggleMenu(true)} className="text-2xl fill-neutral-400 transition-colors hover:fill-neutral-300 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
+                </i>
+                    </div>
 
             </div>
 

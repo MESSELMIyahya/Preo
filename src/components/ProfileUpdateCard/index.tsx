@@ -90,7 +90,7 @@ export default function ProfileUpdateCard() {
         <button type="submit" disabled={isLoading} className="w-full rounded-md --but flex justify-center">
             {
             isLoading ?(
-                <div className="w-5 h-5 m-[2px] rounded-full border-[3px] border-solid border-blue-500 border-r-transparent animate-spin"></div>
+                <div className="--spr"></div>
             ) :(<>Save changes</>)
             }
         </button>

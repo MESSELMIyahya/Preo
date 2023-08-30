@@ -3,40 +3,60 @@
 @tailwind utilities;
 
 
-
-
-
-
-
-
-
 @layer base {
     body::-webkit-scrollbar {
         width: 8px;
     }
     body::-webkit-scrollbar-track {
-        @apply bg-blue-500
+        @apply bg-current
     }
     body::-webkit-scrollbar-thumb {
-        @apply bg-blue-600;
+        @apply bg-neutral-950 ;
     }  
-    body{
-        @apply  bg-gradient-to-r from-cyan-500 to-blue-500;
+    .--bg-color-5 {
+        @apply bg-gradient-to-r  from-orange-400 to-red-400 ;
     }
-    .--bg-color {
+    .--bg-color-0 {
         @apply bg-gradient-to-r from-cyan-500 to-blue-500;
     }
+    .--bg-color-1 {
+        @apply bg-gradient-to-r from-green-500 to-emerald-500;;
+    }
+    .--bg-color-2 {
+        @apply bg-gradient-to-r  from-pink-300 to-purple-400;
+    }
+    .--bg-color-3 {
+        @apply bg-gradient-to-r  from-slate-300 to-slate-500 ;
+    }
+    .--bg-color-4 {
+        @apply bg-gradient-to-r  from-neutral-700 to-neutral-900;
+    }
+
+        /* @apply bg-gradient-to-r from-green-500 to-emerald-500; */
+        
+        /* @apply bg-gradient-to-r  from-pink-300 to-purple-400  */
+        /* @apply bg-gradient-to-r  from-slate-300 to-slate-500  */
+        /* @apply bg-gradient-to-r  from-neutral-700 to-neutral-900  */
+        /* @apply bg-gradient-to-r  from-orange-400 to-red-400  */
+
+    
     .--crd {
         @apply bg-white shadow-md rounded-xl ;
     }
     .--border {
         @apply border-[1px] border-neutral-300 border-solid;
     }
+    .--border2 {
+        @apply border-[1px] border-neutral-100 border-solid;
+    }
     .--input{
         @apply bg-neutral-50 hover:bg-neutral-100  rounded-md text-[1em] text-neutral-700 border-[1px] border-solid border-neutral-300  transition-colors focus:outline-neutral-600 focus:bg-neutral-50 outline-1  p-2 px-4 placeholder:text-neutral-400
     }
+    .--spr{
+        @apply w-5 h-5 m-[2px] rounded-full border-[3px] border-solid border-neutral-600 border-r-transparent animate-spin
+    }
 
- .--blur-bg-color {
+    /* .--blur-bg-color {
         background-image: radial-gradient(rgb(49, 115, 221), rgb(59 130 246), rgb(147 197 253), rgb(191 219 254), white);
         filter: blur(80px);
         filter: saturate(20px);
@@ -48,13 +68,21 @@
         filter: blur(80px);
         filter: saturate(20px);
         rotate: 100deg;
-    } 
+    }  */
 
     .--but {
-        @apply py-1 px-6 bg-blue-500 transition  disabled:bg-blue-300 text-white font-medium rounded-full  hover:transition-colors hover:bg-blue-700
+        @apply py-1 px-6 bg-neutral-800 transition  disabled:bg-neutral-300 text-white font-medium rounded-full  hover:transition-colors hover:bg-neutral-900
     }
 
     .--but-out {
-        @apply py-1 px-6 bg-blue-300  text-blue-600 font-medium rounded-full transition-colors hover:transition-colors hover:text-blue-500
+        @apply py-1 px-6 bg-neutral-100  text-neutral-600 font-medium rounded-full transition-colors hover:transition-colors hover:text-neutral-800
     } 
+
+
+    /* popups */
+
+    .-popup-bg{
+        @apply fixed top-0 left-0 z-[45] w-full h-[100vh] bg-neutral-600 bg-opacity-20 backdrop-blur-sm flex justify-center items-center 
+    }
+
 }

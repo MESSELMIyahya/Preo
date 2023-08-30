@@ -12,6 +12,18 @@ export const GetUserProfile = async (d:any)=>{
 }
 
 
+export const GetUserTheme = async (d:any): Promise<{theme:string}|null> => {
+  const result = await fetch('http://localhost:3000/api/profile/gettheme', {method: 'POST',body:JSON.stringify(d), cache:'no-store' });
+  console.log(result.status);
+  
+  if (result.ok) {
+    return result.json();
+  }
+  return null;
+}
+
+
+
 export const GetUserProfileWithName = async (d:{user:any,Name:string})=>{
   const result = await fetch('http://localhost:3000/api/profile/getuser', {method: 'POST', body:JSON.stringify(d) , cache:'no-store' });
   if(result.status == 404){
@@ -22,3 +34,4 @@ export const GetUserProfileWithName = async (d:{user:any,Name:string})=>{
   }
   return [];
 }
+

@@ -4,6 +4,7 @@ import userModel from "@/db/models/User";
 import NextAuth from "next-auth/next"
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt';
+import { redirect } from "next/navigation";
 
 
 export const AuthOptions = {
@@ -32,7 +33,11 @@ export const AuthOptions = {
             }
         })
     ],
-
+    events:{
+        signOut:async()=>{
+            redirect('/')
+        }
+    },
     session:{
         strategy:"jwt"
     },

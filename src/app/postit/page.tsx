@@ -9,7 +9,7 @@ export default async function PostItPage (){
     const user = await getServerSession(AuthOptions);
     if(!user){ redirect('/')}
 
-    return(<>
+    return(<div className="z-10">
     <CreatePost/>
-    </>)
+    </div>)
 }

@@ -42,6 +42,7 @@ export default function SignInCrd (){
 
             if(res?.ok){
                 setIsLoading(false);
+                router.refresh();
                 router.push('/');
                 return ;
             }
@@ -90,7 +91,7 @@ export default function SignInCrd (){
                 <button disabled={isLoading} type='submit' className="--but w-full flex justify-center rounded-md">
                         {
                             isLoading ? (
-                                <div className="w-5 h-5 m-[2px] rounded-full border-[3px] border-solid border-blue-500 border-r-transparent animate-spin"></div>
+                                <div className="--spr"></div>
                             ) : (<>SignIn</>)
 
                         }

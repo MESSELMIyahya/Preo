@@ -16,7 +16,7 @@ export async function GET() {
         await ConnectToDb();
         const CuUser =  await userModel.findOne({Email:user.user?.email});
         if(!CuUser) return new Response(null,{status:404});
-        const Data = { Desq:CuUser.Desq,Image:CuUser.Image,Tag:CuUser.Tag,Name:CuUser.Name } as UserSchemaType ;
+        const Data = {Theme:CuUser.Theme,Desq:CuUser.Desq,Image:CuUser.Image,Tag:CuUser.Tag,Name:CuUser.Name } as UserSchemaType ;
         return NextResponse.json(Data);
     }catch(e){
         console.log(e);

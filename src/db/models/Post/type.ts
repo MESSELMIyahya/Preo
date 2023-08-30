@@ -7,4 +7,5 @@ interface PostSchemaType {
     Text:string;
     Likes:string[];
     Date:string
+    _id?:string
 }

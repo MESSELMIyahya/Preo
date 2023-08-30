@@ -24,7 +24,7 @@ export async function POST(req:NextRequest) {
         const Posts = (await postModel.find({})).filter(e=>e.Author.Id == CuUser._id);
 
         
-        const Data = {Follow:CuUser.Follow,Followers:CuUser.Followers,Desq:CuUser.Desq,Image:CuUser.Image,Tag:CuUser.Tag,Name:CuUser.Name,Posts:Posts||[] } as UserSchemaType ;
+        const Data = {Theme:CuUser.Theme,Follow:CuUser.Follow,Followers:CuUser.Followers,Desq:CuUser.Desq,Image:CuUser.Image,Tag:CuUser.Tag,Name:CuUser.Name,Posts:Posts||[] } as UserSchemaType ;
         return NextResponse.json(Data);
     }catch(e){       
         return new Response(null,{status:500});
