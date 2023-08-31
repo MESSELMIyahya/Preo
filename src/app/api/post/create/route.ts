@@ -7,7 +7,7 @@ import postModel from '@/db/models/Post';
 
 export async function POST(req:NextRequest) {
     try{
-        const user = await getServerSession(AuthOptions);
+        const user = await getServerSession(AuthOptions as {});
         if(!user) throw '';
         const Data = await req.json();
         await ConnectToDb();
