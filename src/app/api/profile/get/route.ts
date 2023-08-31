@@ -15,8 +15,6 @@ export async function POST(req:NextRequest) {
         const CuUser = await userModel.findOne({Email:user.email});
         if(!CuUser) return new Response(null,{status:404});
         const Posts = (await postModel.find({})).filter(e=>e.Author.Id == CuUser._id);
-
-        console.log('here',Posts);
         
         const Data = {Theme:CuUser.Theme,Follow:CuUser.Follow,Followers:CuUser.Followers,Desq:CuUser.Desq,Image:CuUser.Image,Tag:CuUser.Tag,Name:CuUser.Name,Posts:Posts||[] } as UserSchemaType ;
         return NextResponse.json(Data);

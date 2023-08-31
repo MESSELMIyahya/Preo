@@ -24,8 +24,6 @@ export default async function ProfilePage (){
         if(profileData) colorTheme = getColor(Number(profileData.Theme));
     }
 
-    console.log('hrerecolor' , profileData.Theme);
-    
 
     return (<section className="w-full mt-[6em] select-none z-10">
     <div  className="w-full flex justify-center">

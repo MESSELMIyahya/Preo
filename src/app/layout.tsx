@@ -26,7 +26,6 @@ export default async function RootLayout({
     const userTheme = await GetUserTheme(user.user);
     colornum = Number(userTheme.theme)
     if(userTheme) colorTheme = getColor(Number(userTheme.theme));
-    console.log(colorTheme);
   }
 
   return (

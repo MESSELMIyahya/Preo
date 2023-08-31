@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 
 export default async function RegisterPage (){
     const user = await getServerSession(AuthOptions);
-    console.log(user);
     if(user){ redirect('/')}
 
     return(<section className="w-full mt-[6em] select-none">

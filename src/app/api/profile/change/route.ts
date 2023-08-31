@@ -29,19 +29,6 @@ export async function PUT(req:NextRequest) {
             const d = newPosts[i];
             await postModel.updateOne({_id:d},{Author:{Image:User.Image,Id:User._id,Tag:UserChanges.Tag,Name:UserChanges.Name}})
         }
-
-
-
-        fs.writeFileSync('./UserPosts.json',JSON.stringify(newPosts),'utf-8');
-        console.log(newPosts);
-        
-
-
-        // fs.writeFileSync('./UserPosts.json',JSON.stringify(Posts),'utf-8');
-        // console.log(Posts);
-        
-
-
         return new Response(null,{status:200});
     }catch(e){
         console.log(e)

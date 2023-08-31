@@ -13,7 +13,7 @@ export async function POST(req:NextRequest) {
         await user.save()
         return new Response(null,{status:201});
     }catch(e){
-        // console.log(e)
+        console.log(e)
         return new Response(null,{status:500});
     }
 }

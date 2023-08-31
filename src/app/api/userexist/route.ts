@@ -10,7 +10,6 @@ export async function GET(req:NextRequest) {
         await ConnectToDb();
         const user = await userModel.findOne({Email:email})
         const exists : boolean = user && true ;
-        console.log(exists);
         return NextResponse.json({is:exists})
     }catch(e){
         return new Response(null,{status:500});

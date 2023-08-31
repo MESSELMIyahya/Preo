@@ -8,9 +8,7 @@ import postModel from "@/db/models/Post";
 
 export async function POST(req:NextRequest) {
     try{
-        const {user} = await req.json();
-        console.log(user);
-        
+        const {user} = await req.json();        
         if(!user) throw 'non user';        
         await ConnectToDb();
         const CuUser =  await userModel.findOne({Email:user?.email});

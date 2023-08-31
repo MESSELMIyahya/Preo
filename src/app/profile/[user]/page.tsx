@@ -14,7 +14,6 @@ export const generateMetadata = async ({params}:{params:{user:string}}): Metadat
     let profileData = null;
     
     if(user && params.user){
-        console.log(user,params.user);
         const d = await GetUserProfileWithName({user:user.user,Name:params.user});
         profileData = d ;
     }

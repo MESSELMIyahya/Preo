@@ -25,7 +25,6 @@ export async function POST(req:NextRequest) {
 
 
         const newState = data.followState ;
-        console.log(newState);
         
         if(newState){
             if(!Follower.Follow.includes(FollowedUser.Name) && !FollowedUser.Followers.includes(Follower.Name)){
