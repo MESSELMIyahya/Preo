@@ -31,13 +31,13 @@ export default function Sitting({Close,df}:Props) {
         router.refresh()
         }catch(err){
             console.log(err);
-            Close(false);
+            Close();
         }
     }
 
 
     return (<div className="-popup-bg p-3">
-        <div onClick={()=>Close(false)} className="w-full absolute h-full flex justify-center items-center z-[43]">
+        <div onClick={()=>Close()} className="w-full absolute h-full flex justify-center items-center z-[43]">
         </div>
 
         <div className="--crd p-3 px-4 rounded-xl z-[44] w-[30em]">

@@ -16,7 +16,7 @@ export default function CreateForm (){
     const [ isLoading ,setIsLoading ] = useState(false);
     const [ err , setErr ] = useState('');
     
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>({} as HTMLTextAreaElement);
 
 
     useEffect(()=>{

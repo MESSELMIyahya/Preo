@@ -8,7 +8,7 @@ import postModel from "@/db/models/Post";
 
 export async function GET() {
     try{
-        const user = await getServerSession(AuthOptions);
+        const user = await getServerSession(AuthOptions as {});
         if(!user) throw '';
         await ConnectToDb();
         const CuUser =  await userModel.findOne({Email:user.user?.email});

@@ -3,10 +3,16 @@ import Link from "next/link";
 import Post from "../Post";
 import FollowBut from "./components/followBut";
 
+interface Props {
+    theme:[string,string]
+    ,Name:string,
+     data: Omit<UserSchemaType,'Posts'> & {Posts:PostSchemaType[]}
+    ,owner:boolean 
+}
 
 
 
-export default function ProfileCard({ data,owner,Name,theme }: {theme:[string,string],Name:string, data: UserSchemaType,owner:boolean }) {
+export default function ProfileCard({ data,owner,Name,theme }: Props) {
 
     
 
@@ -71,7 +77,7 @@ export default function ProfileCard({ data,owner,Name,theme }: {theme:[string,st
             <div className="w-3/5 sm:w-full flex flex-wrap gap-5 sm:gap-3">
 
                 {
-                    data.Posts.length != 0 ? data.Posts.reverse().map(e => <Post color={theme[1]} id={e._id as string} owner={owner} key={e.Text} Author={e.Author} date={e.Date} Text={e.Text} FullSize />) : data.Posts ? 
+                    data.Posts.length != 0 ? data.Posts.reverse().map((e) => <Post color={theme[1]} id={e._id as string} owner={owner} key={e.Text} Author={e.Author} date={e.Date} Text={e.Text} FullSize />) : data.Posts ? 
                     (
                         <>
                             No Posts here

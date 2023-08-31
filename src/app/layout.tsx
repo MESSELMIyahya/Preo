@@ -19,12 +19,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const user = await getServerSession(AuthOptions);
+  const user = await getServerSession(AuthOptions as {});
   let colorTheme = ["#06b6d4", "#3b82f6"];
-  let colornum  = '0';
+  let colornum : number = 0;
   if(user){
     const userTheme = await GetUserTheme(user.user);
-    colornum = Number(userTheme.theme)
+    userTheme ? colornum = Number(userTheme?.theme) : colornum = 0 ;
     if(userTheme) colorTheme = getColor(Number(userTheme.theme));
   }
 

@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function PostItPage (){
 
-    const user = await getServerSession(AuthOptions);
+    const user = await getServerSession(AuthOptions as {});
     if(!user){ redirect('/')}
 
     return(<div className="z-10">

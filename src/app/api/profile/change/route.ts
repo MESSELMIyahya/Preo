@@ -9,7 +9,7 @@ import fs from 'fs';
 
 export async function PUT(req:NextRequest) {
     try{
-        const user = await getServerSession(AuthOptions);
+        const user = await getServerSession(AuthOptions as {});
         const UserChanges = await req.json();
         if(!user || !UserChanges) throw 'err from here';
         await ConnectToDb();

@@ -55,7 +55,7 @@ export default function  MainDataContextProvider ({children}:{children:React.Rea
    </> )
 }
 
-export const useNewFetch : ()=> Omit<CtxType,'userInfo'>  = ()=>{
+export const useNewFetch : ()=> Pick<CtxType,'setNew'|'stopNew'>  = ()=>{
     const {setNew,stopNew,isNew} = useContext(MainDataCtx)
     return {setNew,stopNew,isNew} ;
 }

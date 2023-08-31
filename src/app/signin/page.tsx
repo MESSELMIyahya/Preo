@@ -7,7 +7,7 @@ import { getServerSession } from "next-auth/next";
 
 export default async function SignInPage  (){
 
-    const user = await getServerSession(AuthOptions);
+    const user = await getServerSession(AuthOptions as {});
     if(user){ redirect('/')}
     else{
           return(<section className="w-full mt-[6em] select-none">

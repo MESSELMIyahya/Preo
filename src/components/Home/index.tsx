@@ -59,7 +59,7 @@ export default function HomePosts({posts,followPosts,name}:Props){
             </>) : (<>
             
                 {
-                    Posts.length != 0  ? Posts.map(e=><Post id={e._id||''} owner={e.Author.Name == name} key={e.Text} Author={e.Author} date={e.Date} Text={e.Text} />) : (<>
+                    Posts.length != 0  ? Posts.map(e=><Post id={e._id || ''} owner={e.Author.Name == name} key={e.Text} Author={e.Author} date={e.Date} Text={e.Text} color={""} />) : (<>
                   
                     <div className="--crd w-[10em] p-3 rounded-lg text-center ">
                             <h3 className="font-bold text-3xl mb-1 text-neutral-800">Oops</h3>

@@ -9,8 +9,8 @@ import { AuthOptions } from "../../auth/[...nextauth]/route";
 export async function POST(req:NextRequest) {
     try{
 
-        const user = await getServerSession(AuthOptions);
-        if(!user) throw '';
+        const user = await getServerSession(AuthOptions as {});
+        if(!user?.user) throw '';
         await ConnectToDb();
 
         const {theme} = await req.json();

@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default async function ProfileUpdatePage (){
         
-    const user = await getServerSession(AuthOptions as never);
+    const user = await getServerSession(AuthOptions as {});
     if(!user){ redirect('/')}
 
     return (<section className="w-full mt-[6em] select-none z-10">

@@ -1,5 +1,4 @@
-const Url = process.env.NEXTAUTH_URL ;
-
+const Url = process.env.URL ;
 
 export const GetUserProfile = async (d:any)=>{
     const result = await fetch(`${Url}/api/profile/get`, {method: 'POST', body:JSON.stringify(d) , cache:'no-store' });

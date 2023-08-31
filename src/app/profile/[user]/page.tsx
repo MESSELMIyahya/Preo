@@ -3,14 +3,14 @@ import Card404 from "@/components/404crd";
 import ProfileCard from "@/components/ProfileCard";
 import { getColor } from "@/libs";
 import { GetUserProfileWithName } from "@/libs/user/inde";
-import { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { GetUserTheme } from "@/libs/user/inde";
 
 
 
-export const generateMetadata = async ({params}:{params:{user:string}}): Metadata  => {
-    const user = await getServerSession(AuthOptions);
+
+export const generateMetadata = async ({params}:{params:{user:string}}) => {
+    const user = await getServerSession(AuthOptions as {});
     let profileData = null;
     
     if(user && params.user){
@@ -25,9 +25,9 @@ export const generateMetadata = async ({params}:{params:{user:string}}): Metadat
 
 
 export default async function UserProfilePage ({params}:{params:{user:string}}){
-    const user = await getServerSession(AuthOptions);
+    const user = await getServerSession(AuthOptions as {});
     let profileData = null;
-    let colorTheme = ["#06b6d4", "#3b82f6"];
+    let colorTheme : [string,string] = ["#06b6d4", "#3b82f6"];
     
     if(user && params.user){
         const userTheme = await GetUserTheme(user.user);
@@ -43,7 +43,7 @@ export default async function UserProfilePage ({params}:{params:{user:string}}){
         {
             profileData ? ( <ProfileCard data={profileData} theme={colorTheme} Name={user?.user?.name as string} owner={false} />) : (<Card404/>)
         }
-           
+        
     
         </div>
         </section>

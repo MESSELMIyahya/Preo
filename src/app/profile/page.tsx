@@ -14,10 +14,11 @@ export const metadata: Metadata = {
   
 
 export default async function ProfilePage (){
-    const user = await getServerSession(AuthOptions as never);
+    const user = await getServerSession(AuthOptions as {});
     let profileData = null;
-    let colorTheme = ["#06b6d4", "#3b82f6"];
-    if(!user){ redirect('/')}
+    let colorTheme : [string,string] = ["#06b6d4", "#3b82f6"];
+    if(!user?.user){ redirect('/')}
+
     if(user){
         const d = await GetUserProfile(user?.user);
         if(d) profileData = d 
@@ -28,7 +29,7 @@ export default async function ProfilePage (){
     return (<section className="w-full mt-[6em] select-none z-10">
     <div  className="w-full flex justify-center">
 
-        <ProfileCard data={profileData} theme={colorTheme} owner />
+        <ProfileCard Name={user?.user.name||'Your Name'} data={profileData} theme={colorTheme} owner />
 
     </div>
     </section>

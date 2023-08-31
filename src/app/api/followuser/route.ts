@@ -8,7 +8,7 @@ import { v4 } from 'uuid'
 export async function POST(req:NextRequest) {
     try{
         
-        const user = await getServerSession(AuthOptions);
+        const user = await getServerSession(AuthOptions as {});
         const data = await req.json();
         
         

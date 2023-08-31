@@ -8,11 +8,11 @@ import { GetPostsAll } from "@/libs/posts";
 
 
 export default async function Home() {
-  const user = await getServerSession(AuthOptions);
+  const user = await getServerSession(AuthOptions as {});
 
   if(user){ 
     const res = await GetPostsAll(user);
-    return (<HomePosts posts={res.all} followPosts={res.follow} name={user.user?.name} />);
+    return (<HomePosts posts={res.all} followPosts={res.follow} name={user.user?.name || 'username'} />);
   }else {
     return (<StartPage/>);
   }
