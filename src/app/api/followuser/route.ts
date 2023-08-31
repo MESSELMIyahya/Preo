@@ -8,12 +8,11 @@ import { v4 } from 'uuid'
 export async function POST(req:NextRequest) {
     try{
         
-        const user = await getServerSession(AuthOptions as {});
+        const user = await getServerSession(AuthOptions as {})
         const data = await req.json();
         
-        
         if(!user || !data) throw 'no auth';
-
+ 
         await ConnectToDb();
         // current user
         const Follower = await userModel.findOne({Email:user.user?.email});
